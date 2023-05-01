@@ -12,7 +12,7 @@ const Sidebar = () => {
 
       <div className="profile">
         <img className="avatar" src="https://github.com/leoschellenberg.png" />
-        <strong>Diego Fernandes</strong>
+        <strong>Leonardo Schellenberg</strong>
         <span>Web Developer</span>
       </div>
 
