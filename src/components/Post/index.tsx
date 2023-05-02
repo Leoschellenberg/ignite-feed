@@ -1,5 +1,5 @@
 import Avatar from "../Avatar";
-import { Comment } from "../Comment";
+import Comment from "../Comment";
 import * as S from "./styles";
 
 const Post = () => {
