@@ -17,15 +17,15 @@ export const Aside = styled.aside`
         flex-direction: column;
         align-items: center;
 
-        margin-top: calc(0px - 1.5rem - 6px);
+         margin-top: calc(0px - 1.5rem - 6px);
 
-        img.avatar{
+        /* .avatar{
             width: calc(3rem + 12px);
             height: calc(3rem + 12px);
             border-radius: 8px;
             border: 4px solid var(--gray-800);
             outline: 2px solid var(--green-500);
-        }
+        } */
 
         strong {
             margin-top: 1rem;
