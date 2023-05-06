@@ -1,9 +1,15 @@
+import { ImgHTMLAttributes } from 'react';
 import * as S from "./styles";
 
-const Avatar = ({ hasBorder = true, src }) => {
+
+interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement>{
+  hasBorder?: boolean
+}
+
+const Avatar = ({ hasBorder = true, src, ... props }: AvatarProps) => {
   return (
     <>
-        <S.Avatar hasBorder={hasBorder} src={src} />
+        <S.Avatar hasBorder={hasBorder} src={src} {...props} />
     </>
   );
 };
