@@ -8,7 +8,7 @@ const Post = () => {
         <article className="post">
             <header>
               <div className="author">
-                <Avatar hasBorder={false} src="https://github.com/leoschellenberg.png" />
+                <Avatar hasBorder={true} src="https://github.com/leoschellenberg.png" />
                 <div className="authorInfo">
                   <strong>Leonardo Schellenberg</strong>
                   <span>Web Developer</span>
