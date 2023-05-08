@@ -2,7 +2,7 @@ import { ThumbsUp, Trash } from "phosphor-react";
 import Avatar from "../Avatar";
 import * as S from "./styles";
 
-const Comment = () => {
+const Comment = ({ content }) => {
   return (
     <S.Comment>
     <div className="comment">
@@ -21,7 +21,7 @@ const Comment = () => {
             </button>
           </header>
 
-          <p>Muito bom Devon, parabéns!! 👏👏</p>
+          <p>{content}</p>
         </div>
 
         <footer>
