@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, InvalidEvent, useState } from 'react';
 import { format, formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -7,7 +7,22 @@ import Comment from "../Comment";
 
 import * as S from "./styles";
 
-const Post = ({ author, publishedAt, content }) => {
+interface PostPorps {
+  author: {
+    name: string,
+    role: string,
+    avatarUrl: string
+  },
+  publishedAt: Date,
+  content: Content[]
+}
+
+interface Content {
+  type: 'paragraph' | 'link';
+  content: string
+}
+
+const Post = ({ author, publishedAt, content }: PostPorps) => {
   const [newCommentText, setNewCommentText] = useState('');
   const [comments, setComments] = useState([
     'Um comentario legal!'
@@ -22,12 +37,25 @@ const Post = ({ author, publishedAt, content }) => {
     addSuffix: true
   });
 
-  const handleCreateNewComment = () => {
+  const handleCreateNewComment = (event: FormEvent) => {
     event.preventDefault();
     setComments([... comments, newCommentText]);
     setNewCommentText('');
   }
 
+  function handleDeleteComment(commentToDeletel: string){
+    const commentsWithoutDeletedOne = comments.filter( comment => {
+      return comment !== commentToDeletel;
+    })
+
+    setComments(commentsWithoutDeletedOne);
+  }
+
+  function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity('Esse campo é obrigatório!');
+  }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
 
   return (
     <S.Post>
@@ -62,19 +90,20 @@ const Post = ({ author, publishedAt, content }) => {
               <textarea
                 name='comment'
                 value={newCommentText}
+                onInvalid={handleNewCommentInvalid}
                 required
                 onChange={(e) => {setNewCommentText(e.target.value)}}
                 placeholder="Deixe um comentário"
               />
 
               <footer>
-                <button type="submit">Publicar</button>
+                <button type="submit" disabled={isNewCommentEmpty}>Publicar</button>
               </footer>
             </form>
 
             <div className="commentList">
               {comments.map((comment, index) =>{
-                return <Comment key={index + comment} content={comment}/>
+                return <Comment key={index + comment} content={comment} onDeleteComment={handleDeleteComment}/>
               })}
             </div>
         </article>

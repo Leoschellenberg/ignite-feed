@@ -121,7 +121,14 @@ export const Post = styled.div`
   transition: background-color 0.1s;
 }
 
-.commentForm button[type="submit"]:hover {
+.commentForm button[type="submit"]:hover,
+.commentForm button[type="submit"]:not(:disabled):hover {
   background: var(--green-300);
 }
+
+  .commentForm button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
 `;
