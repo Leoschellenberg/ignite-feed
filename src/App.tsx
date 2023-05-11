@@ -3,11 +3,13 @@ import { ThemeProvider } from "styled-components";
 import { DefaultTheme, GlobalStyles } from "@/styles";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-
-import * as S from "./styles/styles";
 import Post from "./components/Post";
 
-const posts = [
+import { PostType } from './components/Post/types';
+
+import * as S from "./styles/styles";
+
+const posts: PostType[] = [
   {
     id: 1,
     author: {
@@ -50,9 +52,7 @@ function App() {
               return (
                 <Post
                   key={post.id}
-                  author={post.author}
-                  content={post.content}
-                  publishedAt={post.publishedAt}
+                  post={post}
                 />
               )
             })}

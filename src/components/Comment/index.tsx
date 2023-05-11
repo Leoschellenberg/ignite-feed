@@ -3,11 +3,8 @@ import Avatar from "../Avatar";
 import * as S from "./styles";
 import { useState } from "react";
 
+import { CommentProps } from './types';
 
-interface CommentProps {
-  content: string,
-  onDeleteComment: (comment: string) => void,
-}
 
 const Comment = ({ content, onDeleteComment }:CommentProps) => {
 

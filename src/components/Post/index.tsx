@@ -2,37 +2,24 @@ import { FormEvent, InvalidEvent, useState } from 'react';
 import { format, formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
+import { PostProps } from './types';
+
 import Avatar from "../Avatar";
 import Comment from "../Comment";
 
 import * as S from "./styles";
 
-interface PostPorps {
-  author: {
-    name: string,
-    role: string,
-    avatarUrl: string
-  },
-  publishedAt: Date,
-  content: Content[]
-}
-
-interface Content {
-  type: 'paragraph' | 'link';
-  content: string
-}
-
-const Post = ({ author, publishedAt, content }: PostPorps) => {
+const Post = ({ post }: PostProps) => {
   const [newCommentText, setNewCommentText] = useState('');
   const [comments, setComments] = useState([
     'Um comentario legal!'
   ]);
 
-  const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+  const publishedDateFormatted = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
     locale: ptBR,
   });
 
-  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+  const publishedDateRelativeToNow = formatDistanceToNow(post.publishedAt, {
     locale: ptBR,
     addSuffix: true
   });
@@ -62,20 +49,20 @@ const Post = ({ author, publishedAt, content }: PostPorps) => {
         <article className="post">
             <header>
               <div className="author">
-                <Avatar hasBorder={true} src={author.avatarUrl}/>
+                <Avatar hasBorder={true} src={post.author.avatarUrl}/>
                 <div className="authorInfo">
-                  <strong>{author.name}</strong>
-                  <span>{author.role}</span>
+                  <strong>{post.author.name}</strong>
+                  <span>{post.author.role}</span>
                 </div>
               </div>
 
-              <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+              <time title={publishedDateFormatted} dateTime={post.publishedAt.toISOString()}>
                 {publishedDateRelativeToNow}
               </time>
             </header>
 
             <div className="content">
-            {content.map(line => {
+            {post.content.map(line => {
               if (line.type === 'paragraph') {
                 return <p key={line.content}>{line.content}</p>;
               } else if (line.type === 'link') {
